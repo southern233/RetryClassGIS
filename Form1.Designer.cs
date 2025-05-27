@@ -30,6 +30,13 @@
         {
             this.mPnlDrawArea = new System.Windows.Forms.Panel();
             this.mPnlControls = new System.Windows.Forms.Panel();
+            this.mBtnAddRandomPoints = new System.Windows.Forms.Button();
+            this.mBtnMoveDown = new System.Windows.Forms.Button();
+            this.mBtnMoveUp = new System.Windows.Forms.Button();
+            this.mBtnMoveRight = new System.Windows.Forms.Button();
+            this.mBtnMoveLeft = new System.Windows.Forms.Button();
+            this.mBtnZoomOut = new System.Windows.Forms.Button();
+            this.mBtnZoomIn = new System.Windows.Forms.Button();
             this.mBtnRefreshMap = new System.Windows.Forms.Button();
             this.mLblMinY = new System.Windows.Forms.Label();
             this.mLblMinX = new System.Windows.Forms.Label();
@@ -46,12 +53,8 @@
             this.mLblY = new System.Windows.Forms.Label();
             this.mLblX = new System.Windows.Forms.Label();
             this.mBtnAddPoint = new System.Windows.Forms.Button();
-            this.mBtnZoomIn = new System.Windows.Forms.Button();
-            this.mBtnZoomOut = new System.Windows.Forms.Button();
-            this.mBtnMoveRight = new System.Windows.Forms.Button();
-            this.mBtnMoveLeft = new System.Windows.Forms.Button();
-            this.mBtnMoveDown = new System.Windows.Forms.Button();
-            this.mBtnMoveUp = new System.Windows.Forms.Button();
+            this.mBtnOpenPointFileDialog = new System.Windows.Forms.Button();
+            this.mBtnShowAll = new System.Windows.Forms.Button();
             this.mPnlControls.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +72,9 @@
             // mPnlControls
             // 
             this.mPnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mPnlControls.Controls.Add(this.mBtnShowAll);
+            this.mPnlControls.Controls.Add(this.mBtnOpenPointFileDialog);
+            this.mPnlControls.Controls.Add(this.mBtnAddRandomPoints);
             this.mPnlControls.Controls.Add(this.mBtnMoveDown);
             this.mPnlControls.Controls.Add(this.mBtnMoveUp);
             this.mPnlControls.Controls.Add(this.mBtnMoveRight);
@@ -96,6 +102,82 @@
             this.mPnlControls.Name = "mPnlControls";
             this.mPnlControls.Size = new System.Drawing.Size(200, 450);
             this.mPnlControls.TabIndex = 1;
+            // 
+            // mBtnAddRandomPoints
+            // 
+            this.mBtnAddRandomPoints.Location = new System.Drawing.Point(103, 105);
+            this.mBtnAddRandomPoints.Name = "mBtnAddRandomPoints";
+            this.mBtnAddRandomPoints.Size = new System.Drawing.Size(67, 27);
+            this.mBtnAddRandomPoints.TabIndex = 22;
+            this.mBtnAddRandomPoints.Text = "随机点";
+            this.mBtnAddRandomPoints.UseVisualStyleBackColor = true;
+            this.mBtnAddRandomPoints.Click += new System.EventHandler(this.mBtnAddRandomPoints_Click);
+            // 
+            // mBtnMoveDown
+            // 
+            this.mBtnMoveDown.Location = new System.Drawing.Point(103, 354);
+            this.mBtnMoveDown.Name = "mBtnMoveDown";
+            this.mBtnMoveDown.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveDown.TabIndex = 21;
+            this.mBtnMoveDown.Tag = "mBtnMoveDown";
+            this.mBtnMoveDown.Text = "下移";
+            this.mBtnMoveDown.UseVisualStyleBackColor = true;
+            this.mBtnMoveDown.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveUp
+            // 
+            this.mBtnMoveUp.Location = new System.Drawing.Point(22, 354);
+            this.mBtnMoveUp.Name = "mBtnMoveUp";
+            this.mBtnMoveUp.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveUp.TabIndex = 20;
+            this.mBtnMoveUp.Tag = "mBtnMoveUp";
+            this.mBtnMoveUp.Text = "上移";
+            this.mBtnMoveUp.UseVisualStyleBackColor = true;
+            this.mBtnMoveUp.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveRight
+            // 
+            this.mBtnMoveRight.Location = new System.Drawing.Point(103, 325);
+            this.mBtnMoveRight.Name = "mBtnMoveRight";
+            this.mBtnMoveRight.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveRight.TabIndex = 19;
+            this.mBtnMoveRight.Tag = "mBtnMoveRight";
+            this.mBtnMoveRight.Text = "右移";
+            this.mBtnMoveRight.UseVisualStyleBackColor = true;
+            this.mBtnMoveRight.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveLeft
+            // 
+            this.mBtnMoveLeft.Location = new System.Drawing.Point(22, 325);
+            this.mBtnMoveLeft.Name = "mBtnMoveLeft";
+            this.mBtnMoveLeft.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveLeft.TabIndex = 18;
+            this.mBtnMoveLeft.Tag = "mBtnMoveLeft";
+            this.mBtnMoveLeft.Text = "左移";
+            this.mBtnMoveLeft.UseVisualStyleBackColor = true;
+            this.mBtnMoveLeft.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnZoomOut
+            // 
+            this.mBtnZoomOut.Location = new System.Drawing.Point(103, 296);
+            this.mBtnZoomOut.Name = "mBtnZoomOut";
+            this.mBtnZoomOut.Size = new System.Drawing.Size(67, 23);
+            this.mBtnZoomOut.TabIndex = 17;
+            this.mBtnZoomOut.Tag = "mBtnZoomOut";
+            this.mBtnZoomOut.Text = "缩小";
+            this.mBtnZoomOut.UseVisualStyleBackColor = true;
+            this.mBtnZoomOut.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnZoomIn
+            // 
+            this.mBtnZoomIn.Location = new System.Drawing.Point(22, 296);
+            this.mBtnZoomIn.Name = "mBtnZoomIn";
+            this.mBtnZoomIn.Size = new System.Drawing.Size(67, 23);
+            this.mBtnZoomIn.TabIndex = 16;
+            this.mBtnZoomIn.Tag = "mBtnZoomIn";
+            this.mBtnZoomIn.Text = "放大";
+            this.mBtnZoomIn.UseVisualStyleBackColor = true;
+            this.mBtnZoomIn.Click += new System.EventHandler(this.mBtnActions_Click);
             // 
             // mBtnRefreshMap
             // 
@@ -223,77 +305,31 @@
             // 
             this.mBtnAddPoint.Location = new System.Drawing.Point(22, 105);
             this.mBtnAddPoint.Name = "mBtnAddPoint";
-            this.mBtnAddPoint.Size = new System.Drawing.Size(148, 27);
+            this.mBtnAddPoint.Size = new System.Drawing.Size(67, 27);
             this.mBtnAddPoint.TabIndex = 0;
             this.mBtnAddPoint.Text = "添加点";
             this.mBtnAddPoint.UseVisualStyleBackColor = true;
             this.mBtnAddPoint.Click += new System.EventHandler(this.mBtnAddPoint_Click);
             // 
-            // mBtnZoomIn
+            // mBtnOpenPointFileDialog
             // 
-            this.mBtnZoomIn.Location = new System.Drawing.Point(22, 296);
-            this.mBtnZoomIn.Name = "mBtnZoomIn";
-            this.mBtnZoomIn.Size = new System.Drawing.Size(67, 23);
-            this.mBtnZoomIn.TabIndex = 16;
-            this.mBtnZoomIn.Tag = "mBtnZoomIn";
-            this.mBtnZoomIn.Text = "放大";
-            this.mBtnZoomIn.UseVisualStyleBackColor = true;
-            this.mBtnZoomIn.Click += new System.EventHandler(this.mBtnActions_Click);
+            this.mBtnOpenPointFileDialog.Location = new System.Drawing.Point(22, 383);
+            this.mBtnOpenPointFileDialog.Name = "mBtnOpenPointFileDialog";
+            this.mBtnOpenPointFileDialog.Size = new System.Drawing.Size(148, 27);
+            this.mBtnOpenPointFileDialog.TabIndex = 23;
+            this.mBtnOpenPointFileDialog.Text = "打开点文件";
+            this.mBtnOpenPointFileDialog.UseVisualStyleBackColor = true;
+            this.mBtnOpenPointFileDialog.Click += new System.EventHandler(this.mBtnOpenPointFileDialog_Click);
             // 
-            // mBtnZoomOut
+            // mBtnShowAll
             // 
-            this.mBtnZoomOut.Location = new System.Drawing.Point(103, 296);
-            this.mBtnZoomOut.Name = "mBtnZoomOut";
-            this.mBtnZoomOut.Size = new System.Drawing.Size(67, 23);
-            this.mBtnZoomOut.TabIndex = 17;
-            this.mBtnZoomOut.Tag = "mBtnZoomOut";
-            this.mBtnZoomOut.Text = "缩小";
-            this.mBtnZoomOut.UseVisualStyleBackColor = true;
-            this.mBtnZoomOut.Click += new System.EventHandler(this.mBtnActions_Click);
-            // 
-            // mBtnMoveRight
-            // 
-            this.mBtnMoveRight.Location = new System.Drawing.Point(103, 325);
-            this.mBtnMoveRight.Name = "mBtnMoveRight";
-            this.mBtnMoveRight.Size = new System.Drawing.Size(67, 23);
-            this.mBtnMoveRight.TabIndex = 19;
-            this.mBtnMoveRight.Tag = "mBtnMoveRight";
-            this.mBtnMoveRight.Text = "右移";
-            this.mBtnMoveRight.UseVisualStyleBackColor = true;
-            this.mBtnMoveRight.Click += new System.EventHandler(this.mBtnActions_Click);
-            // 
-            // mBtnMoveLeft
-            // 
-            this.mBtnMoveLeft.Location = new System.Drawing.Point(22, 325);
-            this.mBtnMoveLeft.Name = "mBtnMoveLeft";
-            this.mBtnMoveLeft.Size = new System.Drawing.Size(67, 23);
-            this.mBtnMoveLeft.TabIndex = 18;
-            this.mBtnMoveLeft.Tag = "mBtnMoveLeft";
-            this.mBtnMoveLeft.Text = "左移";
-            this.mBtnMoveLeft.UseVisualStyleBackColor = true;
-            this.mBtnMoveLeft.Click += new System.EventHandler(this.mBtnActions_Click);
-            // 
-            // mBtnMoveDown
-            // 
-            this.mBtnMoveDown.Location = new System.Drawing.Point(103, 354);
-            this.mBtnMoveDown.Name = "mBtnMoveDown";
-            this.mBtnMoveDown.Size = new System.Drawing.Size(67, 23);
-            this.mBtnMoveDown.TabIndex = 21;
-            this.mBtnMoveDown.Tag = "mBtnMoveDown";
-            this.mBtnMoveDown.Text = "下移";
-            this.mBtnMoveDown.UseVisualStyleBackColor = true;
-            this.mBtnMoveDown.Click += new System.EventHandler(this.mBtnActions_Click);
-            // 
-            // mBtnMoveUp
-            // 
-            this.mBtnMoveUp.Location = new System.Drawing.Point(22, 354);
-            this.mBtnMoveUp.Name = "mBtnMoveUp";
-            this.mBtnMoveUp.Size = new System.Drawing.Size(67, 23);
-            this.mBtnMoveUp.TabIndex = 20;
-            this.mBtnMoveUp.Tag = "mBtnMoveUp";
-            this.mBtnMoveUp.Text = "上移";
-            this.mBtnMoveUp.UseVisualStyleBackColor = true;
-            this.mBtnMoveUp.Click += new System.EventHandler(this.mBtnActions_Click);
+            this.mBtnShowAll.Location = new System.Drawing.Point(22, 416);
+            this.mBtnShowAll.Name = "mBtnShowAll";
+            this.mBtnShowAll.Size = new System.Drawing.Size(148, 27);
+            this.mBtnShowAll.TabIndex = 24;
+            this.mBtnShowAll.Text = "展示全图";
+            this.mBtnShowAll.UseVisualStyleBackColor = true;
+            this.mBtnShowAll.Click += new System.EventHandler(this.mBtnShowAll_Click);
             // 
             // Form1
             // 
@@ -336,6 +372,9 @@
         private System.Windows.Forms.Button mBtnMoveRight;
         private System.Windows.Forms.Button mBtnMoveLeft;
         private System.Windows.Forms.Button mBtnZoomOut;
+        private System.Windows.Forms.Button mBtnAddRandomPoints;
+        private System.Windows.Forms.Button mBtnShowAll;
+        private System.Windows.Forms.Button mBtnOpenPointFileDialog;
     }
 }
 

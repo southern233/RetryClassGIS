@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,13 @@ namespace RetryClassGIS
 {
     public partial class Form1 : Form
     {
-        List<GISFeature> features = new List<GISFeature>();//存储所有添加的点
+        /// <summary>
+        /// 所有手动添加的点
+        /// </summary>
+        List<GISFeature> manualAddedFeatures = new List<GISFeature>();
         GISView view;//记录当前地图大小和显示范围
+        GISLayer layer;//显示图层
+
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +40,7 @@ namespace RetryClassGIS
             oneAttribute.AddValue(attribute);//添加属性
 
             GISFeature oneFeature = new GISFeature(onePoint,oneAttribute);//构建Feature
-            features.Add(oneFeature);//为列表添加feature
+            manualAddedFeatures.Add(oneFeature);//为列表添加feature
 
             Graphics g = mPnlDrawArea.CreateGraphics();//获取画布
             oneFeature.draw(g, true, 0,view);//绘制feature
@@ -46,9 +52,9 @@ namespace RetryClassGIS
             GISVertex clickVertex = view.ToMapVertex(new Point(e.X, e.Y));//获取点击处的点在map上的位置
             double mindistance = double.MaxValue;
             int findIndex = -1;//确定选中点在列表的index
-            for (int i = 0; i < features.Count; i++)
+            for (int i = 0; i < manualAddedFeatures.Count; i++)
             {
-                double distance = features[i].spatialPart.centroid.Distance(clickVertex);//核心代码
+                double distance = manualAddedFeatures[i].spatialPart.centroid.Distance(clickVertex);//核心代码
                 if (distance < mindistance)
                 {
                     mindistance = distance;
@@ -57,7 +63,7 @@ namespace RetryClassGIS
             }
             if (findIndex == -1 || mindistance > 5)
                 MessageBox.Show("没有点或没有选中点");
-            else MessageBox.Show(features[findIndex].getAttribute(0).ToString());
+            else MessageBox.Show(manualAddedFeatures[findIndex].getAttribute(0).ToString());
         }
 
         private void mBtnRefreshMap_Click(object sender, EventArgs e)
@@ -97,7 +103,7 @@ namespace RetryClassGIS
                     return;
             }
             view.ChangeView(action);
-            UpdateMap();
+            UpdateVertex();
         }
 
         private void UpdateMap()
@@ -105,12 +111,71 @@ namespace RetryClassGIS
             //更新地图
             Graphics g = mPnlDrawArea.CreateGraphics();
             g.Clear(Color.White);//清屏
-            //重新绘制点
-            for (int i = 0; i < features.Count; i++)
+            layer.draw(g,view);//重新绘制shp文件
+            g.Dispose();
+        }
+        private void UpdateVertex()
+        {
+            //更新地图
+            Graphics g = mPnlDrawArea.CreateGraphics();
+            g.Clear(Color.White);//清屏
+            //重新绘制点手动添加的点
+            for (int i = 0; i < manualAddedFeatures.Count; i++)
             {
-                features[i].draw(g, true, 0, view);
+                manualAddedFeatures[i].draw(g, true, 0, view);
+            }
+            g.Dispose();
+        }
+
+        private void mBtnAddRandomPoints_Click(object sender, EventArgs e)
+        {
+            //生成100个随机点
+            manualAddedFeatures.Clear();//清空点
+            Random rand = new Random();
+            double x = 0, y = 0;
+            for (int i = 0; i < 100; i++)
+            {
+                GISAttribute attribute = new GISAttribute();
+                attribute.AddValue(Convert.ToString(i));
+                x = rand.NextDouble() * ClientRectangle.Width;
+                y = rand.NextDouble() * ClientRectangle.Height;
+                GISPoint point = new GISPoint(new GISVertex(x, y));
+                manualAddedFeatures.Add(new GISFeature(point, attribute));
+            }
+            UpdateVertex();
+        }
+
+        private void mBtnOpenPointFileDialog_Click(object sender, EventArgs e)
+        {
+            //读取文件
+            string filePath = @"D:\Swork\GIS开发\XGIS_Sample_Data\XGIS_Sample_Data\cities.shp";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".shp文件(*.shp*)|*.shp*";
+            ofd.RestoreDirectory = true;//记住路径
+            ofd.Title = "选取ShapeFile文件（.shp）";
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                filePath = ofd.FileName;
             }
 
+            GISShapeFile shpFile = new GISShapeFile();
+            layer = shpFile.ReadShapeFile(filePath);
+            layer.drawAttributeOrNot = false;
+
+            showAllSpatial();
+
+            MessageBox.Show("读取了" + layer.FeatureCount() + "个点");
+        }
+
+        private void showAllSpatial()
+        {
+            view.UpdateExtent(layer.extent);
+            UpdateMap();
+        }
+
+        private void mBtnShowAll_Click(object sender, EventArgs e)
+        {
+            showAllSpatial();
         }
     }
 }
