@@ -10,3 +10,8 @@
 选择错误
 
 ![image](https://github.com/user-attachments/assets/bbab8a74-edcb-4d66-9a2c-af4b7dbf80e8)
+
+第二章
+完成更好的基础类
+
+![QQ_1748326618082](https://github.com/user-attachments/assets/b05ea94d-b10c-4684-a152-62b0c63d3241)
