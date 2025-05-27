@@ -35,7 +35,7 @@ namespace RetryClassGIS
         public abstract void Draw(Graphics g,GISView view);//用于实现的抽象绘制方法
     }
     class GISFeature
-        {
+    {
         //特征类:包含Spatial抽象类(实体)和Attribute属性类
         public GISSpatial spatialPart;
         public GISAttribute attributePart;
