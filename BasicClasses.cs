@@ -32,10 +32,10 @@ namespace RetryClassGIS
         public GISVertex centroid;//实体的中心坐标
         public GISExtent extent;//实体的边界
 
-        public abstract void Draw(Graphics g);//用于实现的抽象绘制方法
+        public abstract void Draw(Graphics g,GISView view);//用于实现的抽象绘制方法
     }
     class GISFeature
-    {
+        {
         //特征类:包含Spatial抽象类(实体)和Attribute属性类
         public GISSpatial spatialPart;
         public GISAttribute attributePart;
@@ -46,12 +46,17 @@ namespace RetryClassGIS
             this.spatialPart = spatialPart;
             this.attributePart = attributePart;
         }
-        public void draw(Graphics g,bool DrawAttributeOrNot,int index)
+        public void draw(Graphics g,bool DrawAttributeOrNot,int index,GISView view)
         {
             //绘制属性
-            spatialPart.Draw(g);
+            spatialPart.Draw(g,view);
             if(DrawAttributeOrNot)
-                attributePart.draw(g,spatialPart.centroid,index);
+                attributePart.draw(g,spatialPart.centroid,index,view);
+        }
+        public object getAttribute(int index)
+        {
+            //获取对应index的属性值
+            return attributePart.Getvalue(index);
         }
     }
     class GISAttribute
@@ -68,12 +73,13 @@ namespace RetryClassGIS
             return values[index];
         }
 
-        public void draw(Graphics g,GISVertex location,int index) {
-            //绘制属性
+        public void draw(Graphics g,GISVertex location,int index,GISView view) {
+        //绘制属性
+            Point screenPoint = view.ToScreenPoint(location);
             g.DrawString(values[index].ToString(),
                 new Font("宋体",20),
-                new SolidBrush(Color.Black),
-                (int)location.x,(int)location.y);
+            new SolidBrush(Color.Black),
+                screenPoint.X,screenPoint.Y);
         }
     }
     class GISExtent
@@ -87,6 +93,37 @@ namespace RetryClassGIS
             this.bottomLeft = bottomLeft;
             this.topRight = topRight;
         }
+        public GISExtent(double bottom,double left,double top,double right)
+        {
+            this.bottomLeft = new GISVertex(left,bottom);
+            this.topRight = new GISVertex(right,top);
+        }
+
+        //实现边界属性的查询
+        public double getMinX()
+        {
+            return this.bottomLeft.x;
+        }
+        public double getMaxX()
+        {
+            return this.topRight.x;
+        }
+        public double getMinY()
+        {
+            return this.topRight.y;
+        }
+        public double getMaxY()
+        {
+            return this.bottomLeft.y;
+        }
+        public double getWidth()
+        {
+            return this.topRight.x - this.bottomLeft.x;
+        }
+        public double getHeight()
+        {
+            return this.bottomLeft.y - this.topRight.y;
+        }
     }
     class GISPoint : GISSpatial
     {
@@ -95,10 +132,11 @@ namespace RetryClassGIS
             centroid = onevertex;
             extent = new GISExtent (onevertex,onevertex);
         }
-        public override void Draw(Graphics g)
+        public override void Draw(Graphics g, GISView view)
         {
+            Point screenPoint = view.ToScreenPoint(centroid);
             g.FillEllipse(new SolidBrush(Color.Red),
-                new Rectangle((int)centroid.x - 3, (int)centroid.y - 3, 6, 6));
+                new Rectangle(screenPoint.X - 3, screenPoint.Y - 3, 6, 6));
         }
         public double Distance(GISVertex anothervertex)
         {
@@ -108,15 +146,59 @@ namespace RetryClassGIS
     class GISLine : GISSpatial
     {
         List<GISVertex> allVertices;
-        public override void Draw(Graphics g)
+        public override void Draw(Graphics g, GISView view)
         {
         }
     }
     class GISPolygon : GISSpatial
     {
         List<GISVertex> allVertices;
-        public override void Draw(Graphics g)
+        public override void Draw(Graphics g, GISView view)
         {
+        }
+    }
+    class GISView
+    {
+        // 记录GISView属性
+        GISExtent currentMapExtent;//当前显示的范围
+        Rectangle mapWindowSize;//地图窗口边界
+        double mapMinX, mapMinY;//地图
+        double mapW, mapH;
+        int winW, winH;//屏幕
+        double scaleX,scaleY;//缩小比例
+
+        public GISView(GISExtent currentMapExtent, Rectangle mapWindowSize)
+        {
+            //更新GISView属性
+            Update(currentMapExtent, mapWindowSize);
+        }
+
+        public void Update(GISExtent currentMapExtent, Rectangle mapWindowSize)
+        {
+            this.currentMapExtent = currentMapExtent;
+            this.mapWindowSize = mapWindowSize;
+            this.mapMinX = currentMapExtent.getMinX();
+            this.mapMinY = currentMapExtent.getMinY();
+            this.mapW = currentMapExtent.getWidth();
+            this.mapH = currentMapExtent.getHeight();
+            this.winW = mapWindowSize.Width;
+            this.winH = mapWindowSize.Height;
+            this.scaleX = mapW / winW;
+            this.scaleY = mapH / winH;
+        }
+        public Point ToScreenPoint(GISVertex oneVertex)
+        {
+            //将GISVertex点(地图)坐标转换为屏幕坐标
+            double screenX = (oneVertex.x - mapMinX)/scaleX;
+            double screenY = (oneVertex.y - mapMinY)/scaleY;
+            return new Point((int)screenX, (int)screenY);
+        }
+        public GISVertex ToMapVertex(Point point)
+        {
+            //将屏幕坐标转换为地图GISVertex点坐标
+            double MapX = scaleX * point.X + mapMinX;
+            double MapY = scaleY * point.Y + mapMinY;
+            return new GISVertex(MapX, MapY);
         }
     }
 }

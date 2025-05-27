@@ -30,6 +30,15 @@
         {
             this.mPnlDrawArea = new System.Windows.Forms.Panel();
             this.mPnlControls = new System.Windows.Forms.Panel();
+            this.mBtnRefreshMap = new System.Windows.Forms.Button();
+            this.mLblMinY = new System.Windows.Forms.Label();
+            this.mLblMinX = new System.Windows.Forms.Label();
+            this.mLblMaxY = new System.Windows.Forms.Label();
+            this.mLblMaxX = new System.Windows.Forms.Label();
+            this.mTxbMaxX = new System.Windows.Forms.TextBox();
+            this.mTxbMinY = new System.Windows.Forms.TextBox();
+            this.mTxbMinX = new System.Windows.Forms.TextBox();
+            this.mTxbMaxY = new System.Windows.Forms.TextBox();
             this.mTxbY = new System.Windows.Forms.TextBox();
             this.mTxbAttribute = new System.Windows.Forms.TextBox();
             this.mLblAttribute = new System.Windows.Forms.Label();
@@ -42,6 +51,7 @@
             // 
             // mPnlDrawArea
             // 
+            this.mPnlDrawArea.BackColor = System.Drawing.Color.White;
             this.mPnlDrawArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mPnlDrawArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mPnlDrawArea.Location = new System.Drawing.Point(200, 0);
@@ -53,6 +63,15 @@
             // mPnlControls
             // 
             this.mPnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mPnlControls.Controls.Add(this.mBtnRefreshMap);
+            this.mPnlControls.Controls.Add(this.mLblMinY);
+            this.mPnlControls.Controls.Add(this.mLblMinX);
+            this.mPnlControls.Controls.Add(this.mLblMaxY);
+            this.mPnlControls.Controls.Add(this.mLblMaxX);
+            this.mPnlControls.Controls.Add(this.mTxbMaxX);
+            this.mPnlControls.Controls.Add(this.mTxbMinY);
+            this.mPnlControls.Controls.Add(this.mTxbMinX);
+            this.mPnlControls.Controls.Add(this.mTxbMaxY);
             this.mPnlControls.Controls.Add(this.mTxbY);
             this.mPnlControls.Controls.Add(this.mTxbAttribute);
             this.mPnlControls.Controls.Add(this.mLblAttribute);
@@ -65,6 +84,80 @@
             this.mPnlControls.Name = "mPnlControls";
             this.mPnlControls.Size = new System.Drawing.Size(200, 450);
             this.mPnlControls.TabIndex = 1;
+            // 
+            // mBtnRefreshMap
+            // 
+            this.mBtnRefreshMap.Location = new System.Drawing.Point(22, 262);
+            this.mBtnRefreshMap.Name = "mBtnRefreshMap";
+            this.mBtnRefreshMap.Size = new System.Drawing.Size(148, 27);
+            this.mBtnRefreshMap.TabIndex = 15;
+            this.mBtnRefreshMap.Text = "更新地图";
+            this.mBtnRefreshMap.UseVisualStyleBackColor = true;
+            this.mBtnRefreshMap.Click += new System.EventHandler(this.mBtnRefreshMap_Click);
+            // 
+            // mLblMinY
+            // 
+            this.mLblMinY.AutoSize = true;
+            this.mLblMinY.Location = new System.Drawing.Point(19, 241);
+            this.mLblMinY.Name = "mLblMinY";
+            this.mLblMinY.Size = new System.Drawing.Size(47, 15);
+            this.mLblMinY.TabIndex = 14;
+            this.mLblMinY.Text = "MinY:";
+            // 
+            // mLblMinX
+            // 
+            this.mLblMinX.AutoSize = true;
+            this.mLblMinX.Location = new System.Drawing.Point(19, 210);
+            this.mLblMinX.Name = "mLblMinX";
+            this.mLblMinX.Size = new System.Drawing.Size(47, 15);
+            this.mLblMinX.TabIndex = 13;
+            this.mLblMinX.Text = "MinX:";
+            // 
+            // mLblMaxY
+            // 
+            this.mLblMaxY.AutoSize = true;
+            this.mLblMaxY.Location = new System.Drawing.Point(19, 179);
+            this.mLblMaxY.Name = "mLblMaxY";
+            this.mLblMaxY.Size = new System.Drawing.Size(47, 15);
+            this.mLblMaxY.TabIndex = 12;
+            this.mLblMaxY.Text = "MaxY:";
+            // 
+            // mLblMaxX
+            // 
+            this.mLblMaxX.AutoSize = true;
+            this.mLblMaxX.Location = new System.Drawing.Point(19, 148);
+            this.mLblMaxX.Name = "mLblMaxX";
+            this.mLblMaxX.Size = new System.Drawing.Size(47, 15);
+            this.mLblMaxX.TabIndex = 11;
+            this.mLblMaxX.Text = "MaxX:";
+            // 
+            // mTxbMaxX
+            // 
+            this.mTxbMaxX.Location = new System.Drawing.Point(70, 138);
+            this.mTxbMaxX.Name = "mTxbMaxX";
+            this.mTxbMaxX.Size = new System.Drawing.Size(100, 25);
+            this.mTxbMaxX.TabIndex = 10;
+            // 
+            // mTxbMinY
+            // 
+            this.mTxbMinY.Location = new System.Drawing.Point(70, 231);
+            this.mTxbMinY.Name = "mTxbMinY";
+            this.mTxbMinY.Size = new System.Drawing.Size(100, 25);
+            this.mTxbMinY.TabIndex = 9;
+            // 
+            // mTxbMinX
+            // 
+            this.mTxbMinX.Location = new System.Drawing.Point(70, 200);
+            this.mTxbMinX.Name = "mTxbMinX";
+            this.mTxbMinX.Size = new System.Drawing.Size(100, 25);
+            this.mTxbMinX.TabIndex = 8;
+            // 
+            // mTxbMaxY
+            // 
+            this.mTxbMaxY.Location = new System.Drawing.Point(70, 169);
+            this.mTxbMaxY.Name = "mTxbMaxY";
+            this.mTxbMaxY.Size = new System.Drawing.Size(100, 25);
+            this.mTxbMaxY.TabIndex = 7;
             // 
             // mTxbY
             // 
@@ -116,9 +209,9 @@
             // 
             // mBtnAddPoint
             // 
-            this.mBtnAddPoint.Location = new System.Drawing.Point(51, 116);
+            this.mBtnAddPoint.Location = new System.Drawing.Point(22, 105);
             this.mBtnAddPoint.Name = "mBtnAddPoint";
-            this.mBtnAddPoint.Size = new System.Drawing.Size(85, 33);
+            this.mBtnAddPoint.Size = new System.Drawing.Size(148, 27);
             this.mBtnAddPoint.TabIndex = 0;
             this.mBtnAddPoint.Text = "添加点";
             this.mBtnAddPoint.UseVisualStyleBackColor = true;
@@ -150,6 +243,15 @@
         private System.Windows.Forms.Label mLblX;
         private System.Windows.Forms.TextBox mTxbY;
         private System.Windows.Forms.TextBox mTxbAttribute;
+        private System.Windows.Forms.Button mBtnRefreshMap;
+        private System.Windows.Forms.Label mLblMinY;
+        private System.Windows.Forms.Label mLblMinX;
+        private System.Windows.Forms.Label mLblMaxY;
+        private System.Windows.Forms.Label mLblMaxX;
+        private System.Windows.Forms.TextBox mTxbMaxX;
+        private System.Windows.Forms.TextBox mTxbMinY;
+        private System.Windows.Forms.TextBox mTxbMinX;
+        private System.Windows.Forms.TextBox mTxbMaxY;
     }
 }
 
