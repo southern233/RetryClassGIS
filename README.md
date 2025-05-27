@@ -15,3 +15,13 @@
 完成更好的基础类
 
 ![QQ_1748326618082](https://github.com/user-attachments/assets/b05ea94d-b10c-4684-a152-62b0c63d3241)
+
+第三章
+坐标系统（通过输入坐标实现放大和缩小）
+
+![image](https://github.com/user-attachments/assets/296872f0-6e38-495d-9ddc-9fba8b83036c)
+![QQ_1748335968863](https://github.com/user-attachments/assets/2026ef64-6d7e-48a9-9014-1f1c65339f98)
+
+窗口坐标示意图
+
+![QQ_1748336003686](https://github.com/user-attachments/assets/7d461eaf-778c-4fd8-8a55-cabaea6bf5a2)
