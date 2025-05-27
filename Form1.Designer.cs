@@ -46,6 +46,12 @@
             this.mLblY = new System.Windows.Forms.Label();
             this.mLblX = new System.Windows.Forms.Label();
             this.mBtnAddPoint = new System.Windows.Forms.Button();
+            this.mBtnZoomIn = new System.Windows.Forms.Button();
+            this.mBtnZoomOut = new System.Windows.Forms.Button();
+            this.mBtnMoveRight = new System.Windows.Forms.Button();
+            this.mBtnMoveLeft = new System.Windows.Forms.Button();
+            this.mBtnMoveDown = new System.Windows.Forms.Button();
+            this.mBtnMoveUp = new System.Windows.Forms.Button();
             this.mPnlControls.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +69,12 @@
             // mPnlControls
             // 
             this.mPnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mPnlControls.Controls.Add(this.mBtnMoveDown);
+            this.mPnlControls.Controls.Add(this.mBtnMoveUp);
+            this.mPnlControls.Controls.Add(this.mBtnMoveRight);
+            this.mPnlControls.Controls.Add(this.mBtnMoveLeft);
+            this.mPnlControls.Controls.Add(this.mBtnZoomOut);
+            this.mPnlControls.Controls.Add(this.mBtnZoomIn);
             this.mPnlControls.Controls.Add(this.mBtnRefreshMap);
             this.mPnlControls.Controls.Add(this.mLblMinY);
             this.mPnlControls.Controls.Add(this.mLblMinX);
@@ -217,6 +229,72 @@
             this.mBtnAddPoint.UseVisualStyleBackColor = true;
             this.mBtnAddPoint.Click += new System.EventHandler(this.mBtnAddPoint_Click);
             // 
+            // mBtnZoomIn
+            // 
+            this.mBtnZoomIn.Location = new System.Drawing.Point(22, 296);
+            this.mBtnZoomIn.Name = "mBtnZoomIn";
+            this.mBtnZoomIn.Size = new System.Drawing.Size(67, 23);
+            this.mBtnZoomIn.TabIndex = 16;
+            this.mBtnZoomIn.Tag = "mBtnZoomIn";
+            this.mBtnZoomIn.Text = "放大";
+            this.mBtnZoomIn.UseVisualStyleBackColor = true;
+            this.mBtnZoomIn.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnZoomOut
+            // 
+            this.mBtnZoomOut.Location = new System.Drawing.Point(103, 296);
+            this.mBtnZoomOut.Name = "mBtnZoomOut";
+            this.mBtnZoomOut.Size = new System.Drawing.Size(67, 23);
+            this.mBtnZoomOut.TabIndex = 17;
+            this.mBtnZoomOut.Tag = "mBtnZoomOut";
+            this.mBtnZoomOut.Text = "缩小";
+            this.mBtnZoomOut.UseVisualStyleBackColor = true;
+            this.mBtnZoomOut.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveRight
+            // 
+            this.mBtnMoveRight.Location = new System.Drawing.Point(103, 325);
+            this.mBtnMoveRight.Name = "mBtnMoveRight";
+            this.mBtnMoveRight.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveRight.TabIndex = 19;
+            this.mBtnMoveRight.Tag = "mBtnMoveRight";
+            this.mBtnMoveRight.Text = "右移";
+            this.mBtnMoveRight.UseVisualStyleBackColor = true;
+            this.mBtnMoveRight.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveLeft
+            // 
+            this.mBtnMoveLeft.Location = new System.Drawing.Point(22, 325);
+            this.mBtnMoveLeft.Name = "mBtnMoveLeft";
+            this.mBtnMoveLeft.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveLeft.TabIndex = 18;
+            this.mBtnMoveLeft.Tag = "mBtnMoveLeft";
+            this.mBtnMoveLeft.Text = "左移";
+            this.mBtnMoveLeft.UseVisualStyleBackColor = true;
+            this.mBtnMoveLeft.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveDown
+            // 
+            this.mBtnMoveDown.Location = new System.Drawing.Point(103, 354);
+            this.mBtnMoveDown.Name = "mBtnMoveDown";
+            this.mBtnMoveDown.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveDown.TabIndex = 21;
+            this.mBtnMoveDown.Tag = "mBtnMoveDown";
+            this.mBtnMoveDown.Text = "下移";
+            this.mBtnMoveDown.UseVisualStyleBackColor = true;
+            this.mBtnMoveDown.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
+            // mBtnMoveUp
+            // 
+            this.mBtnMoveUp.Location = new System.Drawing.Point(22, 354);
+            this.mBtnMoveUp.Name = "mBtnMoveUp";
+            this.mBtnMoveUp.Size = new System.Drawing.Size(67, 23);
+            this.mBtnMoveUp.TabIndex = 20;
+            this.mBtnMoveUp.Tag = "mBtnMoveUp";
+            this.mBtnMoveUp.Text = "上移";
+            this.mBtnMoveUp.UseVisualStyleBackColor = true;
+            this.mBtnMoveUp.Click += new System.EventHandler(this.mBtnActions_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -252,6 +330,12 @@
         private System.Windows.Forms.TextBox mTxbMinY;
         private System.Windows.Forms.TextBox mTxbMinX;
         private System.Windows.Forms.TextBox mTxbMaxY;
+        private System.Windows.Forms.Button mBtnZoomIn;
+        private System.Windows.Forms.Button mBtnMoveDown;
+        private System.Windows.Forms.Button mBtnMoveUp;
+        private System.Windows.Forms.Button mBtnMoveRight;
+        private System.Windows.Forms.Button mBtnMoveLeft;
+        private System.Windows.Forms.Button mBtnZoomOut;
     }
 }
 

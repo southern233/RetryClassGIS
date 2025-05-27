@@ -68,13 +68,49 @@ namespace RetryClassGIS
             double maxX = Double.Parse(mTxbMaxX.Text);
             double maxY = Double.Parse(mTxbMaxY.Text);
             view.Update(new GISExtent(maxY,minX,minY,maxX),ClientRectangle);//刷新view
-            Graphics graphics = mPnlDrawArea.CreateGraphics();
-            graphics.Clear(Color.White);//清屏
+            UpdateMap();
+        }
+        private void mBtnActions_Click(object sender, EventArgs e)
+        {
+            GISMapAction action = GISMapAction.zoomin;
+            switch ((sender as Button).Tag)
+            {
+                case "mBtnZoomIn":
+                    action = GISMapAction.zoomin;
+                    break;
+                case "mBtnZoomOut":
+                    action = GISMapAction.zoomout;
+                    break;
+                case "mBtnMoveLeft":
+                    action = GISMapAction.moveleft;
+                    break;
+                case "mBtnMoveRight":
+                    action = GISMapAction.moveright;
+                    break;
+                case "mBtnMoveUp":
+                    action = GISMapAction.moveup;
+                    break;
+                case "mBtnMoveDown":
+                    action = GISMapAction.movedown;
+                    break;
+                default:
+                    return;
+            }
+            view.ChangeView(action);
+            UpdateMap();
+        }
+
+        private void UpdateMap()
+        {
+            //更新地图
+            Graphics g = mPnlDrawArea.CreateGraphics();
+            g.Clear(Color.White);//清屏
             //重新绘制点
             for (int i = 0; i < features.Count; i++)
             {
-                features[i].draw(graphics, true, 0, view);
+                features[i].draw(g, true, 0, view);
             }
+
         }
     }
 }

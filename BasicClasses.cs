@@ -35,7 +35,7 @@ namespace RetryClassGIS
         public abstract void Draw(Graphics g,GISView view);//用于实现的抽象绘制方法
     }
     class GISFeature
-        {
+    {
         //特征类:包含Spatial抽象类(实体)和Attribute属性类
         public GISSpatial spatialPart;
         public GISAttribute attributePart;
@@ -87,6 +87,9 @@ namespace RetryClassGIS
         //实体的边界，由左下、右上两个角点构成
         private GISVertex bottomLeft;
         private GISVertex topRight;
+        
+        private double zoomingFactor = 1.5;//地图的放大值,默认为1.5
+        private double movingFactor = 0.2;//地图的移动值,默认为0.2
 
         public GISExtent(GISVertex bottomLeft, GISVertex topRight)
         {
@@ -123,6 +126,61 @@ namespace RetryClassGIS
         public double getHeight()
         {
             return this.bottomLeft.y - this.topRight.y;
+        }
+
+        //修改边界
+        public void ChangeExtent(GISMapAction action)
+        {
+            double newMinX = bottomLeft.x;
+            double newMaxX = topRight.x;
+            double newMinY = topRight.y;
+            double newMaxY = bottomLeft.y;
+            switch (action)
+            {
+                case GISMapAction.zoomin:
+                    newMinX = (getMinX() + getMaxX() - getWidth() / zoomingFactor) / 2;
+                    newMaxX = (getMinX() + getMaxX() + getWidth() / zoomingFactor) / 2;
+                    newMinY = (getMinY() + getMaxY() - getWidth() / zoomingFactor) / 2;
+                    newMaxY = (getMinY() + getMaxY() + getWidth() / zoomingFactor) / 2;
+                    break;
+                case GISMapAction.zoomout:
+                    newMinX = (getMinX() + getMaxX() - getWidth() * zoomingFactor) / 2;
+                    newMaxX = (getMinX() + getMaxX() + getWidth() * zoomingFactor) / 2;
+                    newMinY = (getMinY() + getMaxY() - getWidth() * zoomingFactor) / 2;
+                    newMaxY = (getMinY() + getMaxY() + getWidth() * zoomingFactor) / 2;
+                    break;
+                case GISMapAction.moveup:
+                    newMinY -= getHeight() * movingFactor;
+                    newMaxY -= getHeight() * movingFactor;
+                    break;
+                case GISMapAction.movedown:
+                    newMinY += getHeight() * movingFactor;
+                    newMaxY += getHeight() * movingFactor;
+                    break;
+                case GISMapAction.moveleft:
+                    newMinX -= getWidth() * movingFactor;
+                    newMaxX -= getWidth() * movingFactor;
+                    break;
+                case GISMapAction.moveright:
+                    newMinX += getWidth() * movingFactor;
+                    newMaxX += getWidth() * movingFactor;
+                    break;
+            }
+            bottomLeft.y = newMaxY;
+            bottomLeft.x = newMinX;
+            topRight.y = newMinY;
+            topRight.x = newMaxX;
+        }
+
+        public void SetZoomingFactor(double zoomingFactor)
+        {
+            //设置缩小指数
+            this.zoomingFactor = zoomingFactor;
+        }
+        public void SetMovingFactor(double movingFactor)
+        {
+            //设置移动指数
+            this.movingFactor = movingFactor;
         }
     }
     class GISPoint : GISSpatial
@@ -200,5 +258,15 @@ namespace RetryClassGIS
             double MapY = scaleY * point.Y + mapMinY;
             return new GISVertex(MapX, MapY);
         }
+        public void ChangeView(GISMapAction action)
+        {
+            currentMapExtent.ChangeExtent(action);
+            Update(currentMapExtent,mapWindowSize);
+        }
     }
+    enum GISMapAction
+    {
+        //移动操作的枚举类型
+        zoomin, zoomout,moveup,movedown,moveleft,moveright
+    };
 }
