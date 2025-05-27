@@ -25,3 +25,16 @@
 窗口坐标示意图
 
 ![QQ_1748336003686](https://github.com/user-attachments/assets/7d461eaf-778c-4fd8-8a55-cabaea6bf5a2)
+
+第四章
+缩放和移动（通过按键实现缩放和移动）
+
+![image](https://github.com/user-attachments/assets/5f7acbcf-40fa-4b88-b871-54440f6f5609)
+
+缩放原理
+
+![QQ_1748344883421](https://github.com/user-attachments/assets/074d9c09-b8a2-42ce-9421-30473238fb3d)
+
+平移原理
+
+![QQ_1748344936505](https://github.com/user-attachments/assets/dba4e16a-b2ac-480f-ab41-86d09a1bd357)
