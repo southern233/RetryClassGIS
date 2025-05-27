@@ -35,7 +35,7 @@ namespace RetryClassGIS
         public abstract void Draw(Graphics g);//用于实现的抽象绘制方法
     }
     class GISFeature
-    {
+        {
         //特征类:包含Spatial抽象类(实体)和Attribute属性类
         public GISSpatial spatialPart;
         public GISAttribute attributePart;
@@ -69,10 +69,10 @@ namespace RetryClassGIS
         }
 
         public void draw(Graphics g,GISVertex location,int index) {
-            //绘制属性
+        //绘制属性
             g.DrawString(values[index].ToString(),
                 new Font("宋体",20),
-                new SolidBrush(Color.Black),
+            new SolidBrush(Color.Black),
                 (int)location.x,(int)location.y);
         }
     }
@@ -109,14 +109,14 @@ namespace RetryClassGIS
     {
         List<GISVertex> allVertices;
         public override void Draw(Graphics g)
-        {
+    {
         }
     }
     class GISPolygon : GISSpatial
     {
         List<GISVertex> allVertices;
         public override void Draw(Graphics g)
-        {
+    {
         }
     }
 }
