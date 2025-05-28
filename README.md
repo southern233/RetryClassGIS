@@ -38,3 +38,19 @@
 平移原理
 
 ![QQ_1748344936505](https://github.com/user-attachments/assets/dba4e16a-b2ac-480f-ab41-86d09a1bd357)
+
+（附加）随机点
+
+![image](https://github.com/user-attachments/assets/b87dc6bd-9302-47db-ab32-8a4e4a2687b2)
+
+
+第五章
+shp点文件的导入、解析和显示
+
+点文件的导入、解析
+
+![image](https://github.com/user-attachments/assets/67530020-5a26-4ac1-be44-eb26b5789aec)
+
+点文件的显示
+
+![image](https://github.com/user-attachments/assets/0b223caa-51d7-45a3-ab92-a3f9a8f5bb5c)
