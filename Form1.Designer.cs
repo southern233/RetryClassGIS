@@ -53,8 +53,6 @@
             this.mLblY = new System.Windows.Forms.Label();
             this.mLblX = new System.Windows.Forms.Label();
             this.mBtnAddPoint = new System.Windows.Forms.Button();
-            this.mBtnOpenPointFileDialog = new System.Windows.Forms.Button();
-            this.mBtnShowAll = new System.Windows.Forms.Button();
             this.mPnlControls.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,8 +70,6 @@
             // mPnlControls
             // 
             this.mPnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mPnlControls.Controls.Add(this.mBtnShowAll);
-            this.mPnlControls.Controls.Add(this.mBtnOpenPointFileDialog);
             this.mPnlControls.Controls.Add(this.mBtnAddRandomPoints);
             this.mPnlControls.Controls.Add(this.mBtnMoveDown);
             this.mPnlControls.Controls.Add(this.mBtnMoveUp);
@@ -311,26 +307,6 @@
             this.mBtnAddPoint.UseVisualStyleBackColor = true;
             this.mBtnAddPoint.Click += new System.EventHandler(this.mBtnAddPoint_Click);
             // 
-            // mBtnOpenPointFileDialog
-            // 
-            this.mBtnOpenPointFileDialog.Location = new System.Drawing.Point(22, 383);
-            this.mBtnOpenPointFileDialog.Name = "mBtnOpenPointFileDialog";
-            this.mBtnOpenPointFileDialog.Size = new System.Drawing.Size(148, 27);
-            this.mBtnOpenPointFileDialog.TabIndex = 23;
-            this.mBtnOpenPointFileDialog.Text = "打开点文件";
-            this.mBtnOpenPointFileDialog.UseVisualStyleBackColor = true;
-            this.mBtnOpenPointFileDialog.Click += new System.EventHandler(this.mBtnOpenPointFileDialog_Click);
-            // 
-            // mBtnShowAll
-            // 
-            this.mBtnShowAll.Location = new System.Drawing.Point(22, 416);
-            this.mBtnShowAll.Name = "mBtnShowAll";
-            this.mBtnShowAll.Size = new System.Drawing.Size(148, 27);
-            this.mBtnShowAll.TabIndex = 24;
-            this.mBtnShowAll.Text = "展示全图";
-            this.mBtnShowAll.UseVisualStyleBackColor = true;
-            this.mBtnShowAll.Click += new System.EventHandler(this.mBtnShowAll_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -373,8 +349,6 @@
         private System.Windows.Forms.Button mBtnMoveLeft;
         private System.Windows.Forms.Button mBtnZoomOut;
         private System.Windows.Forms.Button mBtnAddRandomPoints;
-        private System.Windows.Forms.Button mBtnShowAll;
-        private System.Windows.Forms.Button mBtnOpenPointFileDialog;
     }
 }
 
