@@ -54,3 +54,14 @@ shp点文件的导入、解析和显示
 点文件的显示
 
 ![image](https://github.com/user-attachments/assets/0b223caa-51d7-45a3-ab92-a3f9a8f5bb5c)
+
+第六章
+.shp格式线数据和面数据的添加
+
+线数据的导入
+
+![image](https://github.com/user-attachments/assets/2da141a9-06c7-4ada-af6a-f12aa1da75d8)
+
+面数据的导入
+
+![image](https://github.com/user-attachments/assets/3b8f0066-df49-4ffc-a288-1968a3d64d5f)
