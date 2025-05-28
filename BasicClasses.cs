@@ -369,7 +369,6 @@ namespace RetryClassGIS
 
         int FromBigToLittle(int bigIntegerValue)
         {
-            //转换Big Integer到Little Integer
             byte[] bigBytes = new byte[4];//获取BigInteger
             GCHandle handle = GCHandle.Alloc(bigBytes, GCHandleType.Pinned);//分配GCHandle
             Marshal.StructureToPtr(bigIntegerValue,handle.AddrOfPinnedObject(),false);//将数据体转换为指针
