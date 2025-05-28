@@ -103,10 +103,18 @@ namespace RetryClassGIS
                     return;
             }
             view.ChangeView(action);
-            UpdateMap();
+            UpdateVertex();
         }
 
         private void UpdateMap()
+        {
+            //更新地图
+            Graphics g = mPnlDrawArea.CreateGraphics();
+            g.Clear(Color.White);//清屏
+            layer.draw(g,view);//重新绘制shp文件
+            g.Dispose();
+        }
+        private void UpdateVertex()
         {
             //更新地图
             Graphics g = mPnlDrawArea.CreateGraphics();
@@ -134,11 +142,12 @@ namespace RetryClassGIS
                 GISPoint point = new GISPoint(new GISVertex(x, y));
                 manualAddedFeatures.Add(new GISFeature(point, attribute));
             }
-            UpdateMap();
+            UpdateVertex();
         }
 
         private void mBtnOpenPointFileDialog_Click(object sender, EventArgs e)
         {
+            //读取文件
             string filePath = @"D:\Swork\GIS开发\XGIS_Sample_Data\XGIS_Sample_Data\cities.shp";
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = ".shp文件(*.shp*)|*.shp*";
